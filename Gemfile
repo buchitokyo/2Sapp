@@ -5,6 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+#has_secure_passwordメソッドを使用するため
+gem 'bcrypt', '3.1.11'
 #photos update
 gem 'carrierwave'
 gem 'mini_magick'
