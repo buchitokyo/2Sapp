@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>SSapp</title>
+    <title>Home | WeShredd</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +9,13 @@
   </head>
 
   <body>
-    <%= yield %>
+    <!--パーシャルを使用 render 'layout/_header'でheaderのhtmlを呼び込む container外で書いている-->
+    <%= render 'layouts/header' %>
+
+    <div class="container">
+      <%= yield %>
+      <%= render 'layouts/footer' %>
+    </div>
+
   </body>
 </html>
