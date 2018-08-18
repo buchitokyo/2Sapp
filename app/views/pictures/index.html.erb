@@ -1,0 +1,35 @@
+<% provide(:title, "一覧") %>
+<% flash.each do |key, value| %>
+  <div class="alert alert-<%= key %>">
+    <%= value %>
+  </div>
+<% end %>
+<h1>Pictures</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th>Content</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pictures.each do |picture| %>
+      <tr>
+        <!-- 時間 -->
+        <td>Posted <%= time_ago_in_words(picture.created_at) %>ago</td>
+        <td><%= image_tag (picture.image) %></td>
+        <td><%= picture.content %></td>
+        <td><%= link_to 'Show', picture %></td>
+        <td><%= link_to 'Edit', edit_picture_path(picture) %></td>
+        <td><%= link_to 'Destroy', picture, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Picture', new_picture_path %>
