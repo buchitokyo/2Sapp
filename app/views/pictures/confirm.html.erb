@@ -1,0 +1,18 @@
+<div class="container">
+<h1>Confirmation</h1>
+<%= form_with(model: @picture, url: pictures_path, local: true) do |form| %>
+  <!-- 確認画面でアップロードした画像を表示させるための記述 -->
+  <%= form.hidden_field :content %>
+  <%= form.hidden_field :image_cache %>
+
+  <%= image_tag(@picture.image) %>
+  <%= form.hidden_field :image_cache %><br>
+  <%= form.submit "Post", class: 'btn btn-info' %>
+<% end %>
+
+<%= form_with(model:@picture, url:new_picture_path, local:true, method:"get") do |form| %>
+  <%= form.hidden_field :content %>
+  <%= form.hidden_field :image_cache %>
+  <%= form.submit "Back", name: "back", class: 'btn btn-info' %>
+<% end %>
+</div>
