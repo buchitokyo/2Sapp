@@ -70,7 +70,7 @@ p {
 }
 /*footer*/
 footer {
-    margin-top: 3rem;
+    margin-top: 1rem;
     font-size: 12px;
     padding: 10px;
     text-align: center;
@@ -87,4 +87,7 @@ footer ul {
 footer ul li {
   float: left;
   margin-left: 15px;
+}
+.row {
+  margin-bottom: 100px;
 }
