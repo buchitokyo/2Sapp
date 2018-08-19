@@ -20,15 +20,15 @@ pre {
 }
 
 a {
-  color: #000;
+  color: #333;
 
   &:visited {
-    color: #666;
+    color: #333;
   }
 
   &:hover {
-    color: #fff;
-    background-color: #000;
+    color: #337ab7;
+    text-decoration: none;
   }
 }
 
@@ -50,19 +50,6 @@ div {
   color: green;
 }
 
-.field_with_errors {
-  padding: 2px;
-  background-color: red;
-  display: table;
-}
-
-#error_explanation {
-  width: 450px;
-  border: 2px solid red;
-  padding: 7px 7px 0;
-  margin-bottom: 20px;
-  background-color: #f0f0f0;
-
   h2 {
     text-align: left;
     font-weight: bold;
@@ -77,11 +64,13 @@ div {
     font-size: 12px;
     list-style: square;
   }
-}
 
 label {
   display: block;
 }
 table {
   margin-bottom: 100px;
+}
+li{
+  list-style-type: none;
 }

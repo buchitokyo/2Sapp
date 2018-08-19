@@ -1,6 +1,4 @@
-// Place all the styles related to the pictures controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+
 .container {
   height: 100%;
   height: auto !important;
@@ -20,4 +18,17 @@
 /*form.file_fieldを真ん中に*/
 input[type=file] {
     display:inline;
+}
+/*confirmのとこ*/
+.confirm-image {
+  margin-bottom: 30px;
+  img {
+  width: 100%;
+  }
+}
+.confirm-content {
+  font-size: 1.2em;
+  margin-bottom: 30px;
+  padding: 15px;
+  border: 1px solid #eaeaea;
 }

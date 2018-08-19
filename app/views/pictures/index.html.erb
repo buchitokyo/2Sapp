@@ -1,25 +1,20 @@
 <% provide(:title, "一覧") %>
-<% flash.each do |key, value| %>
-  <div class="alert alert-<%= key %>">
-    <%= value %>
-  </div>
-<% end %>
 <h1>Pictures</h1>
-
+<br>
+<%= link_to 'New Picture', new_picture_path %>
+<br>
 <table>
     <% @pictures.each do |picture| %>
-      <ul>
-        <ol><%= image_tag (picture.image) %></ol>
-        <ol><%= picture.content %></ol>
+    <div class="content-image">
+      <%= image_tag (picture.image) %>
+    </div>
+    <div class="content-text">
+        <%= picture.content %>
+    </div>
         <!-- 時間 -->
-        <ol>Posted <%= time_ago_in_words(picture.created_at) %>ago</ol>
-        <ol><%= link_to 'Show', picture %> | <%= link_to 'Edit', edit_picture_path(picture) %> |
-          <%= link_to 'Destroy', picture, method: :delete, data: { confirm: 'Are you sure?' } %> </ol>
-          <br>
-      </ul>
+        <li>Posted <%= time_ago_in_words(picture.created_at) %>ago</li>
+        <li><%= link_to 'Show', picture %> | <%= link_to 'Edit', edit_picture_path(picture) %> |
+          <%= link_to 'Destroy', picture, method: :delete, data: { confirm: 'Are you sure?' } %> </li>
+        <br>
     <% end %>
 </table>
-
-<br>
-
-<%= link_to 'New Picture', new_picture_path %>
