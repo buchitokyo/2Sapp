@@ -1,4 +1,23 @@
 // Place all the styles related to the pictures controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-/*container*/
+.container {
+  height: 100%;
+  height: auto !important;
+  min-height: 100%;
+  position: relative;
+}
+/*写真アップロードの際*/
+.field {
+  margin-bottom: 10px;
+	padding: 10px 0;
+	border-bottom: 1px solid #ccc;
+  text-align: center;
+}
+.actions {
+  text-align: center;
+}
+/*form.file_fieldを真ん中に*/
+input[type=file] {
+    display:inline;
+}
