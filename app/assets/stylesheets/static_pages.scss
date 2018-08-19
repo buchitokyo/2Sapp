@@ -1,7 +1,9 @@
 /* universal */
-
 body {
   padding-top: 60px;
+}
+html, body{
+    height: 100%;
 }
 
 section {
@@ -74,6 +76,8 @@ footer {
     text-align: center;
     border-top: 1px solid #1a1a1a;
     bottom: 0;
+    position: absolute;
+    width : 100%;
 }
 footer ul {
   float: right;
