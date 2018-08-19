@@ -21,10 +21,11 @@
 
   <div class="field">
     <%= form.label :content %>
-    <%= form.text_area :content, id: :picture_content %>
+    <!-- placeholder: "コメントを入力"で枠内にかける -->
+    <%= form.text_area :content, id: :picture_content,placeholder: "コメントを入力"%>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit"Send", class: 'btn btn-info' %>
   </div>
 <% end %>
