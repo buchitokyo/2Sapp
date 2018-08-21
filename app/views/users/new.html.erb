@@ -8,16 +8,16 @@
       <%= render 'shared/error_messages' %>
 
       <%= f.label :name %>
-      <%= f.text_field :name,class: "form-control",placeholder: "名前" %>
+      <%= f.text_field :name, class: "form-control",placeholder: "名前" %>
 
       <%= f.label :email %>
-      <%= f.email_field :email,class: "form-control",placeholder: "メースアドレス" %>
+      <%= f.email_field :email, class: "form-control",placeholder: "メールアドレス" %>
 
       <%= f.label :password %>
-      <%= f.password_field :password,class: "form-control",placeholder: "パスワード"%>
+      <%= f.password_field :password, class: "form-control",placeholder: "パスワード"%>
 
       <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.password_field :password_confirmation,class: "form-control",placeholder: "確認用" %>
+      <%= f.password_field :password_confirmation, class: "form-control", placeholder: "確認用" %>
 
       <%= f.submit "Create my account", class: "btn btn-primary" %>
     <% end %>
