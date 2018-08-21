@@ -12,4 +12,5 @@ class User < ApplicationRecord
 #セキュアにハッシュ化したパスワードを、データベース内のpassword_digestというカが必要
  has_secure_password
  validates :password, presence: true, length: { minimum: 6 }
+
 end

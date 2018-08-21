@@ -1,19 +1,28 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
-    <%= link_to "WeShred", '#', id: "logo" %>
+    <%= link_to "WeShred", home_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Home",   '#' %></li></li>
+        <li><%= link_to "Home", home_path %></li></li>
+        <li><%= link_to "Help",help_path %></li>
+        <% if logged_in? %>
+        <li><%= link_to "Users", '#' %></li>
         <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-          Settings <span class="caret"></span></a>
+          Account <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><%= link_to "Log in",'#' %></li>
-              <li role="separator" class="divider"></li>
-              <li><%= link_to "Help",'#' %></li>
-              <li><%= link_to "Profile",'#' %></li>
+              <!--urlのパスの書き方-->
+              <!--current_userでも可-->
+              <li><%= link_to "Profile", user_path(current_user) %></li>
+              <li><%= link_to "Settings", '#' %></li>
+              <li class="divider"></li>
+              <!--session_path(current_user.id)でも可-->
+              <li><%= link_to "Log out", logout_path, method: :delete %></li>
             </ul>
         </li>
+        <% else %>
+        <li><%= link_to "Log in", login_path %></li>
+        <% end %>
       </ul>
     </nav>
   </div>

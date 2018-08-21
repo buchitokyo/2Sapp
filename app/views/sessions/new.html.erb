@@ -1,0 +1,23 @@
+<% provide(:title, "Log in") %>
+<h1>Log in</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <!--signクラスを投入-->
+    <div class = "sign">
+    <!--login_pathは、sessions_path(create)でもいけるね-->
+    <%= form_with(scope: :session, url: login_path, local: true) do |f| %>
+
+      <%= f.label :email %>
+      <%= f.email_field :email, class: 'form-control', placeholder: "メールアドレス" %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password, class: 'form-control', placeholder: "パスワード" %>
+
+      <%= f.submit "Log in", class: "btn btn-primary" %>
+    <% end %>
+<!-- routingで作成しとかないと飛ばない-->
+    <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+    </div>
+  </div>
+</div>
