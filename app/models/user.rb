@@ -36,6 +36,7 @@ class User < ApplicationRecord
   # user.remember_tokenメソッド (cookiesの保存場所です) を使ってトークンにアクセスできるようにする必要
   self.remember_token = User.new_token
   #update_attributeメソッドを使って記憶ダイジェストを更新と保存を同時に行う。
+   
   update_attribute( :remember_digest, User.digest(remember_token))    #User.digest(string)のやつ
  end
 
@@ -52,4 +53,5 @@ class User < ApplicationRecord
   def forget
     update_attribute(:remember_digest, nil)
   end
+  
 end
