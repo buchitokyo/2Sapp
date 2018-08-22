@@ -36,7 +36,22 @@ class User < ApplicationRecord
   # user.remember_tokenメソッド (cookiesの保存場所です) を使ってトークンにアクセスできるようにする必要
   self.remember_token = User.new_token
   #update_attributeメソッドを使って記憶ダイジェストを更新と保存を同時に行う。
-  update_attribute( :remember_digest, User.digest(remember_token))
+   
+  update_attribute( :remember_digest, User.digest(remember_token))    #User.digest(string)のやつ
  end
 
+#渡されたtokenが、ダイジェストと一致したら、trueを返す 記憶トークンと記憶ダイジェストを比較する
+ def authenticated?(remember_token)
+    #違うブラウザで入った時にエラーを起こすため
+    return false if remember_digest.nil?
+    #remember_tokenは、attr_accessor :remember_tokenで定義したアクセサとは異なる
+    #比較に使っている==演算子が再定義され,is.password?に
+    BCrypt::Password.new(remember_digest).is.password?(remember_token)
+ end
+
+# ユーザーのログイン情報を破棄する
+  def forget
+    update_attribute(:remember_digest, nil)
+  end
+  
 end
