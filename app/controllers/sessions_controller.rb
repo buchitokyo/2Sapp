@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       log_in user  #seesionshelperは,applicationcontrollerに継承されている
       params[:session][:remember_me] == '1' ? remember(user) : forget(user) #トークンとダイジェストが保存
       #redirect_to user_url(@user)=(user_path(current_user.id)) と等価であり、@userは、インスタンスでそのuserを表す
-      redirect_to user
+      redirect_back_or user
     else
       #ログイン失敗した場合
       flash.now[:danger] = "ログインに失敗しました"

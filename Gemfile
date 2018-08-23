@@ -4,7 +4,11 @@ git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
 end
-
+# ページネーション
+gem 'kaminari', '~> 0.17.0'
+gem 'kaminari-bootstrap', '~> 3.0.1'
+#シードデータ
+gem 'faker'
 gem 'bootstrap-sass', '3.3.7'
 #has_secure_passwordメソッドを使用するため
 gem 'bcrypt', '3.1.11'
