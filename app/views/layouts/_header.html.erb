@@ -6,7 +6,7 @@
         <li><%= link_to "Home", home_path %></li></li>
         <li><%= link_to "Help",help_path %></li>
         <% if logged_in? %>
-        <li><%= link_to "Users", '#' %></li>
+        <li><%= link_to "Users", users_path %></li>
         <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
           Account <span class="caret"></span></a>
@@ -14,7 +14,7 @@
               <!--urlのパスの書き方-->
               <!--current_userでも可-->
               <li><%= link_to "Profile", user_path(current_user) %></li>
-              <li><%= link_to "Settings", '#' %></li>
+              <li><%= link_to "Settings", edit_user_path(current_user) %></li>
               <li class="divider"></li>
               <!--session_path(current_user.id)でも可-->
               <li><%= link_to "Log out", logout_path, method: :delete %></li>

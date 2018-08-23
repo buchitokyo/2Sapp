@@ -31,7 +31,6 @@ cookiesからユーザーとトークン（cookies[:remember_token]）を取り�
 と一致することを確認する
 
 
-
 This README would normally document whatever steps are necessary to get the
 application up and running.
 

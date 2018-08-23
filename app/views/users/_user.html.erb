@@ -1,0 +1,10 @@
+<li>
+  <%= image_tag user.icon, size: 50 %>
+  <!-- これでいけるみたい -->
+  <%= link_to user.name, user %>
+  <!--このif の条件の２つめは自分自身のアカウントの横にdeleteを持たせないことを要請している。
+      事実管理者ユーザーの横には delete ボタンが存在しない。-->
+  <% if current_user.admin? && !current_user?(user) %>
+    | <%= link_to "delete", user, method: :delete, data: { confirm: "You sure?" } %>
+  <% end %>
+</li>
