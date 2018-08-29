@@ -1,0 +1,17 @@
+<li id="photos-<%= picture.id %>">
+
+<!-- 重要 -->
+  <% if picture.user.icon.present? %>
+        <%= link_to image_tag(picture.user.icon.url),picture.user %>
+  <% end %>
+  <span class="user"><%= link_to picture.user.name, picture.user %></span>
+  <span class="content"><%= picture.content %></span>
+  <%= image_tag picture.image.url if picture.image? %>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(picture.created_at) %>ago.
+    <% if current_user?(picture.user)%>
+    <%= link_to "edit", edit_picture_path(picture.id) %> |
+    <%= link_to "delete", picture, method: :delete,data: { confirm: "You sure?" } %>
+    <% end %>
+  </span>
+</li>

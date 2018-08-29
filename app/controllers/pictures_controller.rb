@@ -1,74 +1,60 @@
 class PicturesController < ApplicationController
-  before_action :set_picture, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:create, :destroy]
+  before_action :correct_user,   only: :destroy
 
-  # GET /pictures
-  # GET /pictures.json
-  def index
-    @pictures = Picture.all
-  end
-
-  # GET /pictures/1
-  # GET /pictures/1.json
-  def show
-  end
-
-  # GET /pictures/new
   def new
     @picture = Picture.new
   end
-
-  # GET /pictures/1/edit
-  def edit
+  
+  def confirm
+   @picture = current_user.pictures.build(picture_params)
+   render :new if @picture.invalid?  #:newか
   end
 
-  # POST /pictures
-  # POST /pictures.json
   def create
-    @picture = Picture.new(picture_params)
-
-      if @picture.save
-        flash[:success] = 'Picture was successfully created.'
-        redirect_to pictures_path
+    #インスタンス作らなくても、modelでアソシエーションさせれば、下記の書き方になれる
+    @picture = current_user.pictures.build(picture_params)
+    if @picture.save
+        flash[:success] = 'Picture successfully created.'
+        redirect_to root_url
          #notice: 'Picture was successfully created.'
       else
+         @feed_items = []
         render 'static_pages/home'
-      end
-  end
-
-  # PATCH/PUT /pictures/1
-  # PATCH/PUT /pictures/1.json
-  def update
-    if @picture.update(picture_params)
-        flash[:success] = 'Picture was successfully destroyed.'
-        redirect_to pictures_path
-        #notice: 'Picture was successfully updated.'
-    else
-        render 'edit'
     end
   end
 
-  # DELETE /pictures/1
-  # DELETE /pictures/1.json
-  def destroy
-    @picture.destroy
-    flash[:success] = 'Picture was successfully destroyed.'
-    redirect_to pictures_path
-    #notice: 'Picture was successfully destroyed.'
+  def edit
+    @picture = Picture.find(params[:id])
   end
 
-  def confirm
-    @picture = Picture.new(picture_params)
-    render :new if @picture.invalid?
+  def update
+       @picture = Picture.find(params[:id])
+    if @picture.update(picture_params)
+       flash[:success] = 'Picture was successfully updated.'
+       #update後は、defaultでshowさせたいみたいなので
+       redirect_to controller: 'static_pages', action: 'home'     #user_path(current_user)
+       #notice: 'Picture was successfully updated.'
+    else
+       render 'edit'
+    end
+  end
+
+  def destroy
+    @picture.destroy
+    flash[:success] = "Photo deleted"
+    #request.referrerは、一つ前のURLに戻る。この時は、homeになる
+    redirect_to request.referrer || root_url
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_picture
-      @picture = Picture.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def picture_params
-      params.require(:picture).permit(:image, :image_cache, :content)
-    end
+  def picture_params
+    params.require(:picture).permit(:image,:image_cache,:content)
+  end
+
+  def correct_user
+    @picture = current_user.pictures.find_by(id: params[:id])
+    redirect_to root_url if @picture.nil?
+  end
 end

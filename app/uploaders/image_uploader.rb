@@ -30,6 +30,8 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # Create different versions of your uploaded files:
   # version :thumb do
+      process resize_to_limit: [400, 400]
+
   #   process resize_to_fit: [50, 50]
   # end
 
@@ -44,4 +46,8 @@ class ImageUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+  # アップロード可能な拡張子のリスト
+  def extension_whitelist
+    %w(jpg jpeg gif png)
+  end
 end
