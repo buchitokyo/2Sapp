@@ -5,13 +5,13 @@ class User < ApplicationRecord
 
   mount_uploader :icon, IconUploader
 
-   before_validation { email.downcase! }
+  before_validation { email.downcase! }
 
-   validates :name,  presence: true, length: { maximum: 30 }
+  validates :name,  presence: true, length: { maximum: 30 }
 
-   #VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-   validates :email, presence: true, length: { maximum: 255 },
-   format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
+  #VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :email, presence: true, length: { maximum: 255 },
+  format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
    #format: { with: VALID_EMAIL_REGEX }
    #validationされる前にmailを大文字から小文字に変換する
 
@@ -20,7 +20,7 @@ class User < ApplicationRecord
    #allow_nil: trueでパスワードを記入しなくてもupdateできる
    validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
-
+  
 
   #ハッシュ値を返すコストの少ない方法で
     def User.digest(string)

@@ -1,0 +1,18 @@
+<%= form_with(model: @picture,local: true ,url: choose_home_or_edit) do |f| %>
+  <!--fをf.objectとすることによって、関連付けられたオブジェクトにアクセスすることができる-->
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="field">
+    <%= f.text_area :content, placeholder: "いまなにしてる..." %>
+  </div>
+  <%= f.file_field :image, id: :picture_image , accept: 'image/jpeg,image/gif,image/png' %>
+  <%= f.submit "Post", class: "btn btn-primary" %>
+<% end %>
+
+<script type="text/javascript">
+  $('#micropost_picture').bind('change', function() {
+    var size_in_megabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 5) {
+      alert('Maximum file size is 5MB. Please choose a smaller file.');
+    }
+  });
+</script>
