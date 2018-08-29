@@ -1,8 +1,7 @@
 class User < ApplicationRecord
 
   #読み書きできるセッターメゾット
-   attr_accessor :remember_token
-
+  attr_accessor :remember_token
   mount_uploader :icon, IconUploader
 
    before_validation { email.downcase! }
@@ -19,7 +18,7 @@ class User < ApplicationRecord
    has_secure_password
    #allow_nil: trueでパスワードを記入しなくてもupdateできる
    validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
-
+   has_many :pictures,dependent: :destroy
 
 
   #ハッシュ値を返すコストの少ない方法で
@@ -59,4 +58,10 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, nil)
   end
 
+  # 試作feedの定義
+  # 完全な実装は次章の「ユーザーをフォローする」を参照
+  #model内で定義
+    def feed
+      Picture.where("user_id = ?", id)
+    end
 end
