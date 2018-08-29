@@ -1,6 +1,12 @@
-<h1>Editing Picture</h1>
+<% provide(:title,'edit') %>
+<h2>Edit</h2>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+    <div class="field">
 
-<%= render 'form', picture: @picture %>
+         <%= image_tag(@picture.image.url) if @picture.image.url %>
+         <%= render 'shared/picture_form' %>
 
-<%= link_to 'Show', @picture %> |
-<%= link_to 'Back', pictures_path %>
+    </div>
+    </div>
+</div>

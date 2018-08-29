@@ -16,6 +16,14 @@ User.create!(name:  "Example User",
                password:              password,
                password_confirmation: password)
 end
+
+# Posts
+users = User.order(:created_at).take(6)
+50.times do
+  content = Faker::Lorem.sentence(5)
+  users.each { |user| user.pictures.create!(content: content) }
+end
+
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)

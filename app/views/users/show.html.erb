@@ -8,4 +8,15 @@
       </h1>
     </section>
   </aside>
+  <div class="col-md-8">
+    <% if @user.pictures.any? %>
+    <!-- 配列の中で引数objと同じ要素の数を返します。-->
+      <h3>Photos (<%= @user.pictures.count %>)</h3>
+      <ol class="photos">
+        <!-- _picture.html.erb -->
+        <%= render @pictures %>
+      </ol>
+      <%= paginate @pictures %>
+    <% end %>
+  </div>
 </div>

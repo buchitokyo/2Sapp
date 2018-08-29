@@ -1,24 +1,28 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <h2 class="new-post-title">以下の内容で送信します。</h2>
-    <%= form_with(model: @picture, url: pictures_path, local: true) do |f| %>
+    <h2 class="new-post-title">Are you ready??</h2>
+    <%= form_with(model: @picture ,url: pictures_path,local: true) do |f| %>
       <%= f.hidden_field :image_cache %>
       <%= f.hidden_field :content %>
 
-      <div class="confirm-image">
-        <%= image_tag @picture.image %>
-      </div>
-      <h3>Content</h3>
-      <div class="confirm-content">
-        <%= @picture.content %>
-      </div>
-      <%= f.submit "投稿する", class: "btn btn-primary" %>
-    <% end %>
+      <div class="row">
+        <div class="sign">
+           <section class="photos_form">
+             <%= image_tag @picture.image %>
+             <h2>Content</h2>
+             <%= @picture.content %>
+             <%= f.submit "Post", class: "btn btn-primary" %>
+           <% end %>
 
-    <%= form_with(model: @picture, url: new_picture_path, local: true, method: "get") do |f| %>
-      <%= f.hidden_field :image_cache %>
-      <%= f.hidden_field :content %>
-      <%= f.submit "戻る", name: 'back', class: "btn" %>
-    <% end %>
+           <%= form_with(model: @picture, url: home_path,local: true, method: "get") do |f| %>
+             <%= f.hidden_field :image_cache %>
+             <%= f.hidden_field :content %>
+             <%= f.submit "Back", name: 'back', class: "btn" %>
+           <% end %>
+           </section>
+         </aside>
+        </div>
+    </div>
+
   </div>
 </div>
