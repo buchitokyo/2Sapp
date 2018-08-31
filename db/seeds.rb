@@ -24,6 +24,14 @@ users = User.order(:created_at).take(6)
   users.each { |user| user.pictures.create!(content: content) }
 end
 
+# リレーションシップ
+users = User.all
+user  = users.first
+following = users[2..50]
+followers = users[3..40]
+following.each { |followed| user.follow(followed) }
+followers.each { |follower| follower.follow(user) }
+
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
