@@ -31,6 +31,28 @@ cookiesからユーザーとトークン（cookies[:remember_token]）を取り�
 と一致することを確認する
 
 
+<strong id="following" class="stat">
+...
+</strong>
+こうしておくと、14.2.5でAjaxを実装するときに便利。
+
+has_many :followeds, through: :active_relationships
+Railsは「followeds」というシンボル名を見て、これを「followed」という単数形に変え、 relationshipsテーブルのfollowed_idを使って対象のユーザーを取得してきます。しかし、14.1.1で指摘したように、user.followedsという名前は英語として不適切です。代わりに、user.followingという名前を使いましょう。そのためには、Railsのデフォルトを上書きする必要があります。ここでは:sourceパラメーター (リスト 14.8) を使って、「following配列の元はfollowed idの集合である」ということを明示的にRailsに伝えます。
+
+リスト 14.8: Userモデルにfollowingの関連付けを追加する
+app/models/user.rb
+ class User < ApplicationRecord
+  has_many :microposts, dependent: :destroy
+  has_many :active_relationships, class_name:  "Relationship",
+                                  foreign_key: "follower_id",
+                                  dependent:   :destroy
+  has_many :following, through: :active_relationships, source: :followed
+  .
+  .
+  .
+end
+
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 

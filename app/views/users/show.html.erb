@@ -1,14 +1,24 @@
 <% provide(:title, @user.name) %>
 <div class="row">
   <aside class="col-md-4">
+
     <section class="user_info">
       <h1>
         <%= image_tag @user.icon %>
         <%= @user.name %>
       </h1>
     </section>
+
+    <section class="stats">
+      <%= render 'shared/stats' %>
+      <!--相手のプローフィールで見せる-->
+      <%= render 'follow_form' if logged_in? %>
+    </section>
+
   </aside>
+
   <div class="col-md-8">
+
     <% if @user.pictures.any? %>
     <!-- 配列の中で引数objと同じ要素の数を返します。-->
       <h3>Photos (<%= @user.pictures.count %>)</h3>

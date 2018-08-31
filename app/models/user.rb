@@ -18,14 +18,15 @@ class User < ApplicationRecord
    has_secure_password
    #allow_nil: trueでパスワードを記入しなくてもupdateできる
    validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
-<<<<<<< HEAD
 
-  
-=======
-   has_many :pictures,dependent: :destroy
+  has_many :pictures,dependent: :destroy
 
->>>>>>> account-activation
-
+   #テーブルに紐づくモデル名（Relationship） をオプションとして記載. これでUsersテーブルは、Relationshipsと関連を持つ
+   #follower,followedテーブルを持つことができる。外部キーの名前を<class>_idといったパターン
+  has_many :active_relationships, class_name: 'Relationship',foreign_key: "follower_id",dependent: :destroy
+  has_many :passive_relationships, class_name: "Relationship",foreign_key: "followed_id",dependent: :destroy
+  has_many :following, through: :active_relationships, source: :followed #「ソースの」親、関連付け名、つまり関連付け元の名前を指定
+  has_many :followers, through: :passive_relationships, source: :follower
   #ハッシュ値を返すコストの少ない方法で
     def User.digest(string)
        cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
@@ -42,7 +43,7 @@ class User < ApplicationRecord
    def remember
     # メゾット内でセッターメゾットを呼び出す場合は、selfを必ずつける。
     # 使用しないとremember_tokenという名前のローカル変数が作成されてしまう。
-    # user.remember_tokenメソッド (cookiesの保存場所です) を使ってトークンにアクセスできるようにする必要
+    # user.remember_tokenメソッド (cookiesの保存場所) を使ってトークンにアクセスできるようにする必要
     self.remember_token = User.new_token
     #update_attributeメソッドを使って記憶ダイジェストを更新と保存を同時に行う。
 
@@ -67,6 +68,34 @@ class User < ApplicationRecord
   # 完全な実装は次章の「ユーザーをフォローする」を参照
   #model内で定義
     def feed
-      Picture.where("user_id = ?", id)
+      following_ids = "SELECT followed_id FROM relationships
+                      WHERE follower_id = :user_id"
+      #Inは、()の値と合致するものを取得
+      Picture.where("user_id IN (#{following_ids})
+              OR user_id = :user_id", user_id: id)  #("user_id = ?", id)
     end
+
+    # ユーザーをフォローする
+    def follow(other_user)
+      #followingメソッド
+      #following << other_user
+      active_relationships.create(followed_id: other_user.id)
+    end
+
+    # ユーザーをフォロー解除する
+    def unfollow(other_user)
+       active_relationships.find_by(followed_id: other_user.id).destroy
+    end
+
+    # 現在のユーザーがフォローしてたらtrueを返す
+    def following?(other_user)
+      #include?メソッド  フォローしているユーザーの集合を調べてみたり、関連付けを通してオブジェクトを探しだせる
+      following.include?(other_user)
+    end
+
+    # パスワード再設定の期限が切れている場合はtrueを返す
+    def passsword_reset_expired?
+      reset_sent_at < 2.hours.ago
+    end
+
 end

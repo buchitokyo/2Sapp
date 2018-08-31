@@ -1,5 +1,8 @@
 <% if @feed_items.any? %>
   <ol class="photos">
+    <!--static_pages_controllertで定義  @feed_itemsの各要素がPictureクラス
+    を持っていたため、RailsはMicropostのパーシャルを呼び出すことができる
+     _picture.html.erbを探してくれる（user.rbでfeedを定義してる）-->
     <%= render @feed_items %>
   </ol>
   <%= paginate @feed_items %>
