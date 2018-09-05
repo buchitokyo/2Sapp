@@ -1,0 +1,14 @@
+<% if picture.like_user(current_user.id) %>
+<%= button_to picture_like_path(likes, picture_id: picture.id), method: :delete, id: "like-button", remote: true do %>
+    <%= image_tag("like.png", width: 15, height: 15) %>
+    <span>
+      <%= picture.likes_count %>
+  <% end %>
+<% else %>
+  <%= button_to picture_likes_path(picture),id: "like-button", remote: true do %>
+    <%= image_tag("notlike.png", width: 15, height: 15) %>
+    <span>
+      <%= picture.likes_count %>
+    </span>
+  <% end %>
+<% end %>
