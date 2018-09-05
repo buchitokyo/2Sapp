@@ -5,11 +5,21 @@ class Picture < ApplicationRecord
   validates :image, presence: true
 
   belongs_to :user
+  has_many :likes, dependent: :destroy
+
+#引数で入ったuser_idをlike定義
+  def like_user(user_id)
+   likes.find_by(user_id: user_id)
+  end
+
   validates :user_id, presence: true
   default_scope -> { order(created_at: :desc) }
 
   validate  :image_size
 
+  belongs_to :user
+  has_many :comments, dependent: :destroy
+  #has_many :comments_picture, through: :comments, source: :use
   private
 
     # アップロードされた画像のサイズをバリデーションする

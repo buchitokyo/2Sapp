@@ -29,6 +29,8 @@ class UsersController < ApplicationController
     def show
       @user = User.find(params[:id])
       @pictures = @user.pictures.page(params[:page])
+      # like拡張機能
+      @likes = Like.where(picture_id: params[:picture_id])
     end
 
     def edit
