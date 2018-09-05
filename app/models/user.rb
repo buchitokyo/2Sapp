@@ -19,8 +19,7 @@ class User < ApplicationRecord
    #allow_nil: trueでパスワードを記入しなくてもupdateできる
    validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
-  has_many :pictures, dependent: :destroy
-  has_many :comments, dependent: :destroy
+  has_many :pictures,dependent: :destroy
 
    #テーブルに紐づくモデル名（Relationship） をオプションとして記載. これでUsersテーブルは、Relationshipsと関連を持つ
    #follower,followedテーブルを持つことができる。外部キーの名前を<class>_idといったパターン
@@ -95,8 +94,8 @@ class User < ApplicationRecord
     end
 
     # パスワード再設定の期限が切れている場合はtrueを返す
-    #def passsword_reset_expired?
-      #reset_sent_at < 2.hours.ago
-    #end
+    def passsword_reset_expired?
+      reset_sent_at < 2.hours.ago
+    end
 
 end

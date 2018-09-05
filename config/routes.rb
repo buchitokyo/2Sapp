@@ -30,16 +30,5 @@ Rails.application.routes.draw do
 
   resources :relationships,only: [:create, :destroy]
 
-  #like機能拡張用に指定
-  resources :pictures do
-    resources :likes, only: [:create, :destroy]
-  end
-
-  resources :pictures do
-    resources :comments
-  end
-
-  
-
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end

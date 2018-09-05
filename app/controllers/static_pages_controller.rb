@@ -7,15 +7,6 @@ class StaticPagesController < ApplicationController
       #外部からメゾットを呼び出せる feedも上もそうだが、モデルでアソシエーションを組んでるから使えると考える
 
       @feed_items = current_user.feed.page(params[:page])
-
-      # like拡張機能
-      @likes = Like.where(picture_id: params[:picture_id])
-
-      @comments = @picture.comments
-      @comment = @picture.comments.build
-
-      else
-        redirect_to login_url
     end
 
     if params[:back]
