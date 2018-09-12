@@ -320,3 +320,24 @@ span.picture {
     border: 0;
   }
 }
+
+.comment {
+  margin-top: 5px;
+}
+
+.btn {
+  margin-bottom: 10px;
+}
+
+.comment_area {
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    font-weight: bold;
+    color: black;/*文字色*/
+    background: #FFF;
+    border: solid 1px #6091d3;/*線*/
+    border-radius: 10px;/*角の丸み*/
+}
+.area_cmnt {
+  margin-top: 20px;
+}

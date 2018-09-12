@@ -1,8 +1,10 @@
 class CommentsController < ApplicationController
   # コメントを保存、投稿するためのアクションです。
+
   def create
    # Pictureをパラメータの値から探し出し,Pictureに紐づくcommentsとしてbuildします。
     @picture = Picture.find(params[:picture_id])
+
     @comment = @picture.comments.build(comment_params)
     @comment.user_id = current_user.id
   # クライアント(ブラウザの)要求に応じてフォーマットを変更

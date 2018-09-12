@@ -1,26 +1,19 @@
 class LikesController < ApplicationController
-  
+  before_action :logged_in_user
+
   def create
-    # pictureを取得します。（before_actionをしっていたら共通化しましょう）
-    #@picture = Picture.find(params[:picture_id])
-    @like = Like.create(user_id: current_user.id, picture_id: params[:picture_id])
-
-    # 以下は多分必要ないので削除
-    #whereでデータ取得
+    @picture = Picture.find(params[:picture_id])
+    @like = @picture.likes.create(user_id: current_user.id, picture_id: params[:picture_id])
     @likes = Like.where(picture_id: params[:picture_id])
-    #@pictures = Picture.all
-
+    @pictures = Picture.all
   end
 
   def destroy
-    # pictureを取得します。（before_actionをしっていたら共通化しましょう）
-    #@picture = Picture.find(params[:picture_id])
+    #テーブルの構成
     like = Like.find_by(user_id: current_user.id, picture_id: params[:picture_id])
     like.destroy
-
-    # 以下は多分必要ないので削除
-    #@likes = Like.where(picture_id: params[:picture_id])
-    #@pictures = Picture.all
+    @likes = Like.where(picture_id: params[:picture_id])
+    @pictures = Picture.all
   end
 
 end

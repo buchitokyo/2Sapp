@@ -17,9 +17,10 @@ class Picture < ApplicationRecord
 
   validate  :image_size
 
-  belongs_to :user
   has_many :comments, dependent: :destroy
   #has_many :comments_picture, through: :comments, source: :use
+
+
   private
 
     # アップロードされた画像のサイズをバリデーションする

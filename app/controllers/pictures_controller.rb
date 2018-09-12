@@ -2,9 +2,6 @@ class PicturesController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
   before_action :correct_user,   only: :destroy
 
-  def new
-    @picture = Picture.new
-  end
 
   def confirm
    @picture = current_user.pictures.build(picture_params)
@@ -14,6 +11,7 @@ class PicturesController < ApplicationController
   def create
     #インスタンス作らなくても、modelでアソシエーションさせれば、下記の書き方になれる
     @picture = current_user.pictures.build(picture_params)
+
     if @picture.save
         flash[:success] = 'Picture successfully created.'
         redirect_to root_url
@@ -46,6 +44,7 @@ class PicturesController < ApplicationController
     #request.referrerは、一つ前のURLに戻る。この時は、homeになる
     redirect_to request.referrer || root_url
   end
+
 
   private
 

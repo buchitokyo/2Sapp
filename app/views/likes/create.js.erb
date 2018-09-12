@@ -1,1 +1,1 @@
-$("#like-button").html("<%= j(render 'like', picture: @picture,likes: @likes, like: @like) %>")
+$("#like-buttons"%>").html("<%= escape_javascript(render "likes/like", { pictures: @pictures}) ) %>");

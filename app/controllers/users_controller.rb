@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   def index
     #:page パラメーターに基づいて、DBからデータをとる
     @users = User.page(params[:page])
+
   end
 
   def new
@@ -29,8 +30,15 @@ class UsersController < ApplicationController
     def show
       @user = User.find(params[:id])
       @pictures = @user.pictures.page(params[:page])
+      @comment = Comment.new
+      #undefined method model_nameが起き、user#showでコメント見せるまたは投稿するため
+      #@picture = Picture.find(params[:id])
+
+      #@comments = @picture.comments
       # like拡張機能
+      #@like = Like.create(user_id: current_user.id, picture_id: params[:picture_id])
       @likes = Like.where(picture_id: params[:picture_id])
+
     end
 
     def edit
@@ -72,6 +80,10 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :email, :password,:password_confirmation, :icon, :icon_cache)
     end
+    # ストロングパラメーター
+      def comment_params
+        params.require(:comment).permit(:picture_id, :content, :user_id)
+      end
 
    # beforeフィルター
 

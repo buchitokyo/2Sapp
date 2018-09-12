@@ -17,10 +17,13 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
 
   resources :pictures do
+    resources :likes, only: [:create, :destroy]
+    resources :comments
     collection do
       post :confirm
     end
   end
+
 #memberメソッドを使うとユーザーidが含まれているURLを使用できる　stat/html参照　following_user_path(@user)
   resources :users do
     member do
@@ -30,16 +33,7 @@ Rails.application.routes.draw do
 
   resources :relationships,only: [:create, :destroy]
 
-  #like機能拡張用に指定
-  resources :pictures do
-    resources :likes, only: [:create, :destroy]
-  end
 
-  resources :pictures do
-    resources :comments
-  end
-
-  
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end
