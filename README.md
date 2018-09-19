@@ -52,6 +52,43 @@ app/models/user.rb
   .
 end
 
+def create
+  post_user_id = Picture.find(params[:picture_id]).user_id
+  if post_user_id != current_user.id
+    current_user.likes.create(picture_id: params[:picture_id])
+    @picture = Picture.find(params[:picture_id])
+  end
+end
+
+def destroy
+  post_user_id = Picture.find(params[:picture_id]).user_id
+  if post_user_id != current_user.id
+    current_user.likes.find_by(picture_id: params[:picture_id]).destroy
+    @picture = Picture.find(params[:picture_id])
+  end
+end
+
+<% if picture.like_user(current_user.id) %>
+<% like_id = picture.likes.find_by(user_id: current_user.id).id %>
+<!-- @likes = @picture.likes で、 pictureがlikeしたidがわかり、likeされたpicture.idを削除する-->
+  <%= button_to picture_like_path(likes, picture_id: picture.id), method: :delete, id: "like-button",
+    class: "btn btn-default btn-xs", remote: true do %>
+      <%= content_tag :span, "#", class: "glyphicon glyphicon-heart" %>
+       <span>
+        <%= picture.likes_count %>
+      </span>
+  <% end %>
+<% else %>
+  <%= button_to picture_likes_path(picture), id: "like-button", class: "btn btn-default btn-xs",
+    remote: true do %>
+      <%= content_tag :span, "#", class: "glyphicon glyphicon-heart-empty" %>
+        <span>
+          <%= picture.likes_count %>
+        </span>
+    <% end %>
+<% end %>
+
+
 
 This README would normally document whatever steps are necessary to get the
 application up and running.

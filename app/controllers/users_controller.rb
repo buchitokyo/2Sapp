@@ -6,7 +6,6 @@ class UsersController < ApplicationController
   def index
     #:page パラメーターに基づいて、DBからデータをとる
     @users = User.page(params[:page])
-
   end
 
   def new
@@ -27,34 +26,31 @@ class UsersController < ApplicationController
     end
   end
 
-    def show
-      @user = User.find(params[:id])
-      @pictures = @user.pictures.page(params[:page])
-      @comment = Comment.new
-      #undefined method model_nameが起き、user#showでコメント見せるまたは投稿するため
-      #@picture = Picture.find(params[:id])
+  def show
+    @user = User.find(params[:id])
+    @pictures = @user.pictures.page(params[:page])
+    @comment = Comment.new
 
-      #@comments = @picture.comments
-      # like拡張機能
-      #@like = Like.create(user_id: current_user.id, picture_id: params[:picture_id])
-      @likes = Like.where(picture_id: params[:picture_id])
+    #undefined method model_nameが起き、user#showでコメント見せるまたは投稿するため
+    #@picture = Picture.find(params[:id])
+    # like拡張機能
+    @likes = Like.where(picture_id: params[:picture_id])
+  end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if  @user.update_attributes(user_params)
+      # 更新に成功した場合を扱う。
+      flash[:success] = "Profile updated"
+      redirect_to @user  #users#show
+    else
+      render 'edit'
     end
-
-    def edit
-      @user = User.find(params[:id])
-    end
-
-    def update
-      @user = User.find(params[:id])
-      if  @user.update_attributes(user_params)
-        # 更新に成功した場合を扱う。
-        flash[:success] = "Profile updated"
-        redirect_to @user  #users#show
-      else
-        render 'edit'
-      end
-    end
+  end
 
   def destroy
     User.find(params[:id]).destroy

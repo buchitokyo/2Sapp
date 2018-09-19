@@ -2,6 +2,9 @@ class PicturesController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
   before_action :correct_user,   only: :destroy
 
+  def new
+   @picture = Picture.new
+  end
 
   def confirm
    @picture = current_user.pictures.build(picture_params)

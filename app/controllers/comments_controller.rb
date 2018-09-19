@@ -4,7 +4,6 @@ class CommentsController < ApplicationController
   def create
    # Pictureをパラメータの値から探し出し,Pictureに紐づくcommentsとしてbuildします。
     @picture = Picture.find(params[:picture_id])
-
     @comment = @picture.comments.build(comment_params)
     @comment.user_id = current_user.id
   # クライアント(ブラウザの)要求に応じてフォーマットを変更
@@ -18,14 +17,16 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find(params[:id])
-      if @comment.destroy
+    @picture = Picture.find(params[:picture_id])
+    respond_to do |format|
+    @comment.destroy
         format.js { render :index }
-      end
+    end
   end
 
 private
 # ストロングパラメーター
   def comment_params
-    params.require(:comment).permit(:picture_id, :content, :user_id)
+    params.require(:comment).permit(:content, :picture_id, :user_id)
   end
 end

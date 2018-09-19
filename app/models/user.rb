@@ -28,6 +28,10 @@ class User < ApplicationRecord
   has_many :passive_relationships, class_name: "Relationship",foreign_key: "followed_id",dependent: :destroy
   has_many :following, through: :active_relationships, source: :followed #「ソースの」親、関連付け名、つまり関連付け元の名前を指定
   has_many :followers, through: :passive_relationships, source: :follower
+
+  #いいね機能
+  has_many :likes, dependent: :destroy
+  has_many :like_pictures, through: :likes, source: :picture
   #ハッシュ値を返すコストの少ない方法で
     def User.digest(string)
        cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :

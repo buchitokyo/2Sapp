@@ -5,10 +5,13 @@ class Picture < ApplicationRecord
   validates :image, presence: true
 
   belongs_to :user
+  #いいね機能
   has_many :likes, dependent: :destroy
+  #has_many :like_users, through: :likes, source: :user
 
 #引数で入ったuser_idをlike定義
-  def like_user(user_id)
+# ライクしているユーザーかどうか
+  def like_user?(user_id)
    likes.find_by(user_id: user_id)
   end
 
