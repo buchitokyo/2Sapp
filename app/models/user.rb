@@ -32,6 +32,11 @@ class User < ApplicationRecord
   #いいね機能
   has_many :likes, dependent: :destroy
   has_many :like_pictures, through: :likes, source: :picture
+
+  scope :search_by_keyword, -> (keyword) {
+    where("users.name LIKE :keyword", keyword: "%#{sanitize_sql_like(keyword)}%") if keyword.present?
+  }
+
   #ハッシュ値を返すコストの少ない方法で
     def User.digest(string)
        cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :

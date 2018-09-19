@@ -5,7 +5,15 @@ class StaticPagesController < ApplicationController
       #インスタンス変数もログインしているときのみ定義されるようになる
       @picture = current_user.pictures.build
       #外部からメゾットを呼び出せる feedも上もそうだが、モデルでアソシエーションを組んでるから使える
-      @feed_items = current_user.feed.page(params[:page])
+        if params[:q]
+          relation = Picture.joins(:user)
+          @feed_items = relation.merge(User.search_by_keyword(params[:q]))
+                        .or(relation.search_by_keyword(params[:q]))
+                        .page(params[:page])
+          #Picture.search_by_keyword(params[:q]).page(params[:page])
+        else
+          @feed_items = current_user.feed.page(params[:page])
+        end
       @comment = Comment.new
       @comments = @picture.comments
       @likes = Like.where(picture_id: params[:picture_id])

@@ -23,6 +23,8 @@ class Picture < ApplicationRecord
   has_many :comments, dependent: :destroy
   #has_many :comments_picture, through: :comments, source: :use
 
+  scope :search_by_keyword, -> (keyword) {
+    where("pictures.content LIKE :keyword", keyword: "%#{sanitize_sql_like(keyword)}%") if keyword.present?}
 
   private
 
