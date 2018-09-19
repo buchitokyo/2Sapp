@@ -1,14 +1,21 @@
-<% if picture.like_user(current_user.id) %>
-<%= button_to picture_like_path(likes, picture_id: picture.id), method: :delete, id: "like-button", remote: true do %>
-    <%= image_tag("like.png", width: 15, height: 15) %>
-    <span>
-      <%= picture.likes_count %>
-  <% end %>
-<% else %>
-  <%= button_to picture_likes_path(picture),id: "like-button", remote: true do %>
-    <%= image_tag("notlike.png", width: 15, height: 15) %>
-    <span>
-      <%= picture.likes_count %>
-    </span>
-  <% end %>
+<% if current_user.nil? %>
+  <%= button_to "like", class: "btn btn-default btn-sm" %>
+  <% else %>
+    <% if picture.like_user?(current_user.id)%>
+      <%= button_to picture_like_path(likes, picture_id: picture.id), method: :delete, id: "like-button",
+        class: "btn btn-default btn-xs", remote: true do %>
+          <%= content_tag :span, "#", class: "glyphicon glyphicon-heart" %>
+           <span>
+            <%= picture.likes_count %>
+          </span>
+      <% end %>
+    <% else %>
+      <%= button_to picture_likes_path(picture), id: "like-button", class: "btn btn-default btn-xs",
+        remote: true do %>
+          <%= content_tag :span, "#", class: "glyphicon glyphicon-heart-empty" %>
+            <span>
+              <%= picture.likes_count %>
+            </span>
+        <% end %>
+    <% end %>
 <% end %>

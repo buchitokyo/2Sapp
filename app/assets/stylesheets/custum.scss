@@ -286,7 +286,7 @@ div {
     padding-top: 0;
   }
   .content {
-    border-top: thin solid #f5f5f5;
+    border-bottom: thin solid #f5f5f5;
     margin-top: 10px;
     display: block;
     /*margin-left: 60px;*/
@@ -319,4 +319,31 @@ span.picture {
   input {
     border: 0;
   }
+}
+
+.btn {
+  margin-bottom: 10px;
+}
+
+.comment{
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    font-weight: bold;
+    color: black;/*文字色*/
+    background: #FFF;
+    border: solid 1px #6091d3;/*線*/
+    border-radius: 10px;/*角の丸み*/
+
+    p {
+      margin-top: 15px;
+    }
+}
+.area_cmnt {
+  margin-top: 20px;
+}
+.post {
+  color: $gray-light;
+  margin-left: 60px;
+  font-size: x-small;
+  text-align: right;
 }

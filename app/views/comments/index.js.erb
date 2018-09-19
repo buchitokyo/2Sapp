@@ -1,2 +1,2 @@
-$("#picture-<%= @picture.id %>.comments_area").html("<%= j(render 'index', { comments: @comment.picture.comments,  picture: @comment.picture }) %>")
-$("textarea").val('')
+$("#photos-<%= @picture.id %> .comments_area").html("<%= j(render 'index', { comments: @comment.picture.comments }) %>");
+$("textarea").val('');

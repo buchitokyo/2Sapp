@@ -26,27 +26,31 @@ class UsersController < ApplicationController
     end
   end
 
-    def show
-      @user = User.find(params[:id])
-      @pictures = @user.pictures.page(params[:page])
-      # like拡張機能
-      @likes = Like.where(picture_id: params[:picture_id])
-    end
+  def show
+    @user = User.find(params[:id])
+    @pictures = @user.pictures.page(params[:page])
+    @comment = Comment.new
 
-    def edit
-      @user = User.find(params[:id])
-    end
+    #undefined method model_nameが起き、user#showでコメント見せるまたは投稿するため
+    #@picture = Picture.find(params[:id])
+    # like拡張機能
+    @likes = Like.where(picture_id: params[:picture_id])
+  end
 
-    def update
-      @user = User.find(params[:id])
-      if  @user.update_attributes(user_params)
-        # 更新に成功した場合を扱う。
-        flash[:success] = "Profile updated"
-        redirect_to @user  #users#show
-      else
-        render 'edit'
-      end
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if  @user.update_attributes(user_params)
+      # 更新に成功した場合を扱う。
+      flash[:success] = "Profile updated"
+      redirect_to @user  #users#show
+    else
+      render 'edit'
     end
+  end
 
   def destroy
     User.find(params[:id]).destroy
@@ -72,6 +76,10 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :email, :password,:password_confirmation, :icon, :icon_cache)
     end
+    # ストロングパラメーター
+      def comment_params
+        params.require(:comment).permit(:picture_id, :content, :user_id)
+      end
 
    # beforeフィルター
 

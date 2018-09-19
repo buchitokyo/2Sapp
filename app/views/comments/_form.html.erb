@@ -1,9 +1,10 @@
-<%= form_with(model:[picture, comment]) do |form| %>
-  <div>
-    <%= form.text_area :content,placeholder: "コメントを入力" %>
-  </div>
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+<%= form_with( model:[picture, comment]) do |form| %>
+  <div class="area_cmnt">
+      <%= button_tag( class: "btn btn-default btn-sm") do %>
 
+      <%= content_tag :div, "", class: "glyphicon glyphicon-comment"%>
+      <% end %>
+
+        <%= form.text_area :content, placeholder: "コメントを入力",id: "text_area" %>
+      </div>
 <% end %>
