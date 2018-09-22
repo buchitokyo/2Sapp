@@ -8,7 +8,7 @@
           <%= form_tag(root_path, method: :get) do %>
           <div class = "input-group">
             <!-- パラメータにqが入り&q=???のような文字列になってパラメーター名を渡す-->
-            <%= search_field_tag "q", params[:q], class: "form-control", placeholder: "Keyword search" %>
+            <%= search_field_tag "q", params[:q], class: "form-control", placeholder: "Keyword" %>
             <span class="input-group-btn">
             <%= submit_tag "Search", class: "btn btn-default" %>
             </span>

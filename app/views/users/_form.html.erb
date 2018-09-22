@@ -14,8 +14,9 @@
   <%= f.label :password_confirmation %>
   <%= f.password_field :password_confirmation, class: 'form-control',placeholder: "確認用パスワード" %>
 
+  <% if controller.action_name == "edit"%>
   <%= f.file_field :icon, id: :user_icon %>
-
+  <% end %>
   <%= f.submit yield(:button_text), class: "btn btn-primary" %>
 
 <% end %>
