@@ -64,12 +64,45 @@ p {
   color: #fff;
   text-decoration: none;
 }
-
+.navbar {
+  background-color: #20324e;
+}
 .search-nav {
   width: 200px;
   padding-top: 9px;
 }
 
+#pagetop {
+      display: none;
+      position: fixed;
+      bottom: 8px;
+      right: 8px;
+      padding: 5px 10px;
+      cursor: pointer;
+      background: #555;
+      opacity: 0.9;
+      -moz-opacity: 0.9;
+      filter: alpha(opacity=90);
+      color: #fff;
+      -webkit-box-shadow: 0 0 7px rgba(0,0,0,0.3);
+      -moz-border-radius: 6px;
+      -webkit-border-radius: 6px;
+      border-radius: 6px;
+  }
+
+  #pagetop a {
+    color: #fff;
+
+    &:visited {
+    }
+
+    &:hover {
+      color: #fff;
+      background: #555;
+      opacity: 0.9;
+      text-decoration: none;
+    }
+  }
 /* footer */
 
 footer {
@@ -357,4 +390,12 @@ span.picture {
     background: #FF8552; //ボタンの背景色
     color: white; //ボタンのテキストの色
     border-color: none;
+}
+
+.photos {
+  margin-bottom: 20px;
+}
+
+.deletes {
+  border-bottom: solid 1px #6091d3;/*線*/
 }

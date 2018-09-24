@@ -1,10 +1,12 @@
 <li id="photos-<%= picture.id %>">
 
 <!-- 重要 -->
-  <% if picture.user.icon.present? %>
-        <%= link_to image_tag(picture.user.icon.url),picture.user %>
-  <% end %>
+  <div class="photos">
+    <% if picture.user.icon.present? %>
+          <%= link_to image_tag(picture.user.icon.url),picture.user %>
+    <% end %>
   <span class="user"><%= link_to picture.user.name, picture.user %></span>
+  </div>
   <div><%= image_tag picture.image.url if picture.image? %></div>
   <span class="timestamp">
     Posted <%= time_ago_in_words(picture.created_at) %>前
@@ -19,7 +21,7 @@
   </div>
 
   <div class="comment">
-    <span class="content"><%= picture.content %></span>
+    <span class="content"><%= current_user.name %>:　　<%= picture.content %></span>
       <div class="comments_area" id="comments_area">
           <!--picture: picture-->
         <%= render 'comments/index', { comments: picture.comments, picture: picture } %>
