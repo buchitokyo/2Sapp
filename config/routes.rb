@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root to:'static_pages#home'
-  
+
   get  '/home', to:'static_pages#home'
   get  '/about', to:'static_pages#about'
   get  '/signup', to: 'users#new'
@@ -27,6 +27,5 @@ Rails.application.routes.draw do
 
   resources :relationships,only: [:create, :destroy]
 
-
-  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+  #mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end
