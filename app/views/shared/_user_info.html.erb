@@ -5,4 +5,5 @@
 <h1><%= current_user.name %></h1>
 <span><%= link_to "view my profile", current_user %></span>
 <!--強力なインフレクター (活用形生成) があり、不規則活用を含むさまざまな単語を複数形にすることができます。-->
-<span><%= pluralize( current_user.pictures.count,"photo") %></span>
+
+<span> <%= current_user.pictures.count %><%= pluralize(current_user.pictures.count,"photo")%></span>
