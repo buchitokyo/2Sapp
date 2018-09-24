@@ -15,8 +15,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-
-      UserMailer.user_mail(@user).deliver
+      #UserMailer.user_mail(@user).deliver
       flash[:success] = "Welcome to the WeShred!"
       #これはredirect_to @userというコードから (Railsエンジニアが)
       #user_url(@user)といったコードを実行したいということを、Railsが推察してくれた結果になります。
