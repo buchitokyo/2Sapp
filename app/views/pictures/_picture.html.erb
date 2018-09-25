@@ -21,7 +21,7 @@
   </div>
 
   <div class="comment">
-    <span class="content"><%= picture.comments.name %>:　　<%= picture.content %></span>
+    <span class="content"><%= picture.user.name %>:　　<%= picture.content %></span>
       <div class="comments_area" id="comments_area">
           <!--picture: picture-->
         <%= render 'comments/index', { comments: picture.comments, picture: picture } %>
