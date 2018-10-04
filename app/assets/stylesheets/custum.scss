@@ -146,7 +146,7 @@ input {
   height: auto !important;
 }
 .sign {
-    text-align: center;
+    text-align: left;
     width: 100%;
     max-width: 330px;
     padding: 15px;
@@ -165,8 +165,8 @@ input {
 .checkbox {
   margin-top: -10px;
   margin-bottom: 10px;
+  text-align: center;
   span {
-    margin-left: 20px;
     font-weight: normal;
   }
 }
