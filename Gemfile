@@ -10,7 +10,7 @@ gem 'kaminari-bootstrap', '~> 3.0.1'
 #シードデータ
 gem 'faker'
 gem 'bootstrap-sass', '3.3.7'
-gem 'bootstrap', '4.1.2'
+# gem 'bootstrap', '4.1.2'
 #has_secure_passwordメソッドを使用するため
 gem 'bcrypt', '3.1.11'
 #photos update

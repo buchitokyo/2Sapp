@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
 
   #memberメソッドを使うとユーザーidが含まれているURLを使用できる　stat/html参照　following_user_path(@user)
+  #memberはメンバールーティング（photos/:id/previewのようにidを伴うパス）を追加するときに使う。
     resources :users do
       member do
         get :following, :followers
@@ -19,6 +20,7 @@ Rails.application.routes.draw do
 
   resources :pictures do
     resources :comments
+  #ルーティングにコレクション（/photos/searchのようにidを伴わないパス）を追加するときに使う。
     collection do
       post :confirm
     end
