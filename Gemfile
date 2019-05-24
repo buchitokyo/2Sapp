@@ -10,7 +10,7 @@ gem 'kaminari-bootstrap', '~> 3.0.1'
 #シードデータ
 gem 'faker'
 gem 'bootstrap-sass', '3.3.7'
-# gem 'bootstrap', '4.1.2'
+gem 'bootstrap', '4.1.2'
 #has_secure_passwordメソッドを使用するため
 gem 'bcrypt', '3.1.11'
 #photos update
@@ -20,6 +20,7 @@ gem 'mini_magick'
 gem 'rails', '~> 5.1.1'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
+#gem 'mysql2'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
